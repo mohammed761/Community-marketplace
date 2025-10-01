@@ -11,4 +11,6 @@ public interface ProfessionalRepository extends JpaRepository<Professional, Long
     Optional<Professional> findByUserId(Long userId);
     List<Professional> findByType(ProfessionalType type);
     boolean existsByUserId(Long userId);
+    Optional<Professional> findByUserEmail(String email);
+
 }

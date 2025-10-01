@@ -68,4 +68,15 @@ public class ProfessionalService {
                 .email(professional.getUser().getEmail())
                 .build();
     }
+    public ProfessionalResponseDto updateAvailability(boolean available, String userEmail) {
+        Professional professional = professionalRepository.findByUserEmail(userEmail)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile not found"));
+
+        professional.setAvailable(available);
+        professionalRepository.save(professional);
+
+        return mapToDto(professional);
+    }
+
+
 }

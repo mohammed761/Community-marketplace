@@ -2,6 +2,7 @@ package com.community.marketplace.controller;
 
 import com.community.marketplace.dto.ProfessionalCreateDto;
 import com.community.marketplace.dto.ProfessionalResponseDto;
+import com.community.marketplace.dto.AvailabilityUpdateDto;
 import com.community.marketplace.model.ProfessionalType;
 import com.community.marketplace.service.ProfessionalService;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,6 @@ public class ProfessionalController {
             @RequestBody ProfessionalCreateDto dto,
             Authentication authentication) {
         String email = authentication.getName();
-        System.out.println("Authentication.getName() = " + authentication.getName());
-        System.out.println("Authorities = " + authentication.getAuthorities());
         return ResponseEntity.ok(professionalService.createProfile(dto, email));
     }
 
@@ -40,4 +39,14 @@ public class ProfessionalController {
     public ResponseEntity<ProfessionalResponseDto> getById(@PathVariable Long id) {
         return ResponseEntity.ok(professionalService.getProfessionalById(id));
     }
+    @PutMapping("/availability")
+    @PreAuthorize("hasRole('PROFESSIONAL')")
+    public ResponseEntity<ProfessionalResponseDto> updateAvailability(
+            @RequestBody AvailabilityUpdateDto dto,
+            Authentication authentication) {
+
+        String email = authentication.getName();
+        return ResponseEntity.ok(professionalService.updateAvailability(dto.isAvailable(), email));
+    }
+
 }

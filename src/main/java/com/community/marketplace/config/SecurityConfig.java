@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/professionals/**").permitAll()
 
                 .requestMatchers("/api/professionals/**").authenticated()
-
+                .requestMatchers("/api/customers/**").authenticated()
                 .anyRequest().authenticated()
             )
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

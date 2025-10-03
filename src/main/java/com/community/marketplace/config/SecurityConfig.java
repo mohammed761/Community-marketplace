@@ -29,9 +29,11 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/**").permitAll()
 
                 .requestMatchers(HttpMethod.GET, "/api/professionals/**").permitAll()
-
+                .requestMatchers(HttpMethod.GET, "/api/reviews/professional/**").permitAll()
                 .requestMatchers("/api/professionals/**").authenticated()
                 .requestMatchers("/api/customers/**").authenticated()
+                .requestMatchers("/api/reviews/**").authenticated()
+
                 .anyRequest().authenticated()
             )
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
